@@ -5,7 +5,6 @@ from io import BytesIO
 
 import xml.etree.ElementTree as ET
 
-from django.utils.encoding import force_text
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 
@@ -40,10 +39,39 @@ def make_qr_code_image(text, image_factory, qr_code_options=QRCodeOptions()):
         box_size=valid_size,
         border=qr_code_options.border
     )
-    qr.add_data(force_text(text))
+    qr.add_data(text)
     if valid_version is None:
         qr.make(fit=True)
-    return qr.make_image(image_factory=image_factory)
+
+    img = qr.make_image(image_factory=image_factory, back_color=str(qr_code_options.back_color))
+
+    from PIL import Image
+    from PIL import ImageFont
+    from PIL import ImageDraw
+
+    img2 = Image.open("micros/static/back.jpg")
+    img2.paste(img,(0,0),img)
+    draw = ImageDraw.Draw(img2)
+    font = ImageFont.truetype("micros/static/grilled.ttf", 30)
+
+    ImageDraw.Draw(
+        img2  # Image
+    ).text(
+        qr_code_options.title_position,  # Coordinates
+        qr_code_options.title,  # Text
+        (0, 0, 0),  # Color
+        font=font
+    )
+    ImageDraw.Draw(
+        img2  # Image
+    ).text(
+        qr_code_options.subtitle_position,  # Coordinates
+        qr_code_options.subtitle,  # Text
+        (0, 0, 0),  # Color
+        font=font
+    )
+
+    return img2
 
 
 def _get_valid_error_correction_or_default(error_correction):
