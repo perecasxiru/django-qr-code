@@ -49,7 +49,13 @@ class QRCodeOptions(object):
         border=DEFAULT_BORDER_SIZE,
         version=DEFAULT_VERSION,
         image_format=DEFAULT_IMAGE_FORMAT,
-        error_correction=DEFAULT_ERROR_CORRECTION
+        error_correction=DEFAULT_ERROR_CORRECTION,
+        title="Title",
+        subtitle="Subtitle",
+        back_color="white",
+        title_position=(90,3),
+        subtitle_position=(10,208)
+
     )
     _qr_code_options = dict(_DEFAULT_QR_CODE_OPTIONS)
 
@@ -88,6 +94,26 @@ class QRCodeOptions(object):
     @property
     def error_correction(self):
         return self._qr_code_options['error_correction']
+
+    @property
+    def title(self):
+        return self._qr_code_options['title']
+
+    @property
+    def title_position(self):
+        return self._qr_code_options['title_position']
+
+    @property
+    def subtitle(self):
+        return self._qr_code_options['subtitle']
+
+    @property
+    def subtitle_position(self):
+        return self._qr_code_options['subtitle_position']
+
+    @property
+    def back_color(self):
+        return self._qr_code_options['back_color']
 
 
 class ContactDetail(object):
