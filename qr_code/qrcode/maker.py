@@ -53,7 +53,7 @@ def make_qr_code_image(text, image_factory, qr_code_options=QRCodeOptions()):
     img2.paste(img,(0,0),img)
     draw = ImageDraw.Draw(img2)
     font = ImageFont.truetype("micros/static/grilled.ttf", 30)
-
+    font2 = ImageFont.truetype("micros/static/grilled.ttf", 23)
     ImageDraw.Draw(
         img2  # Image
     ).text(
@@ -68,7 +68,7 @@ def make_qr_code_image(text, image_factory, qr_code_options=QRCodeOptions()):
         qr_code_options.subtitle_position,  # Coordinates
         qr_code_options.subtitle,  # Text
         (0, 0, 0),  # Color
-        font=font
+        font=font2
     )
 
     return img2
