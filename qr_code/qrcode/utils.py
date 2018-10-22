@@ -54,7 +54,7 @@ class QRCodeOptions(object):
         subtitle="Subtitle",
         back_color="white",
         title_position=(90,3),
-        subtitle_position=(10,208)
+        subtitle_position=(37,208)
 
     )
     _qr_code_options = dict(_DEFAULT_QR_CODE_OPTIONS)
