@@ -54,7 +54,8 @@ class QRCodeOptions(object):
         subtitle="Subtitle",
         back_color="white",
         title_position=(90,3),
-        subtitle_position=(37,208)
+        subtitle_position=(37,208),
+        back_offset = (1.15, 1.15)
 
     )
     _qr_code_options = dict(_DEFAULT_QR_CODE_OPTIONS)
@@ -114,6 +115,10 @@ class QRCodeOptions(object):
     @property
     def back_color(self):
         return self._qr_code_options['back_color']
+
+    @property
+    def back_offset(self):
+        return self._qr_code_options['back_offset']
 
 
 class ContactDetail(object):
