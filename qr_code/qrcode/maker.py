@@ -49,29 +49,33 @@ def make_qr_code_image(text, image_factory, qr_code_options=QRCodeOptions()):
     from PIL import ImageFont
     from PIL import ImageDraw
 
-    img2 = Image.open("micros/static/back.jpg")
-    img2 = img2.resize((int(img.size[0]*qr_code_options.back_offset[0]),
-                        int(img.size[1]*qr_code_options.back_offset[1])), Image.ANTIALIAS)
-    img2.paste(img,(0,0),img)
-    # draw = ImageDraw.Draw(img2)
     font = ImageFont.truetype("micros/static/grilled.ttf", 30)
     font2 = ImageFont.truetype("micros/static/grilled.ttf", 23)
+
     ImageDraw.Draw(
-        img2  # Image
+        img  # Image
     ).text(
         qr_code_options.title_position,  # Coordinates
         qr_code_options.title,  # Text
         (0, 0, 0),  # Color
         font=font
     )
+
     ImageDraw.Draw(
-        img2  # Image
+        img  # Image
     ).text(
-        qr_code_options.subtitle_position,  # Coordinates
+        (qr_code_options.subtitle_position[0], min(qr_code_options.subtitle_position[1],img.size[1] * 0.9 // 1)),  # Coordinates
         qr_code_options.subtitle,  # Text
         (0, 0, 0),  # Color
         font=font2
     )
+
+    img2 = Image.open("micros/static/"+qr_code_options.image+".jpg")
+    img2 = img2.resize((int(img.size[0]*qr_code_options.back_offset[0]),
+                        int(img.size[1]*qr_code_options.back_offset[1])), Image.ANTIALIAS)
+    img2.paste(img,qr_code_options.move,img)
+    # draw = ImageDraw.Draw(img2)
+
 
     return img2
 
