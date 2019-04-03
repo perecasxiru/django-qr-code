@@ -50,8 +50,10 @@ def make_qr_code_image(text, image_factory, qr_code_options=QRCodeOptions()):
     from PIL import ImageDraw
 
     img2 = Image.open("micros/static/back.jpg")
+    img2 = img2.resize((int(img.size[0]*qr_code_options.back_offset[0]),
+                        int(img.size[1]*qr_code_options.back_offset[1])), Image.ANTIALIAS)
     img2.paste(img,(0,0),img)
-    draw = ImageDraw.Draw(img2)
+    # draw = ImageDraw.Draw(img2)
     font = ImageFont.truetype("micros/static/grilled.ttf", 30)
     font2 = ImageFont.truetype("micros/static/grilled.ttf", 23)
     ImageDraw.Draw(
