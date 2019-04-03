@@ -64,7 +64,7 @@ def make_qr_code_image(text, image_factory, qr_code_options=QRCodeOptions()):
     ImageDraw.Draw(
         img  # Image
     ).text(
-        (qr_code_options.subtitle_position[0], min(qr_code_options.subtitle_position[1],img.size[1] * 0.9 // 1)),  # Coordinates
+        (qr_code_options.subtitle_position[0], img.size[1]-30),  # Coordinates
         qr_code_options.subtitle,  # Text
         (0, 0, 0),  # Color
         font=font2
