@@ -39,10 +39,10 @@ class QRCodeOptions(object):
     There are 4 error correction levels used for QR codes, with each one adding different amounts of "backup" data
     depending on how much damage the QR code is expected to suffer in its intended environment, and hence how much
     error correction may be required. The correction level can be configured with the *error_correction* parameter as follow:
-        * l or L: error correction level L â€“ up to 7% damage
-        * m or M: error correction level M â€“ up to 15% damage
-        * q or Q: error correction level Q â€“ up to 25% damage
-        * h or H: error correction level H â€“ up to 30% damage
+        * l or L: error correction level L – up to 7% damage
+        * m or M: error correction level M – up to 15% damage
+        * q or Q: error correction level Q – up to 25% damage
+        * h or H: error correction level H – up to 30% damage
     """
     _DEFAULT_QR_CODE_OPTIONS = dict(
         size=DEFAULT_MODULE_SIZE,
@@ -57,7 +57,7 @@ class QRCodeOptions(object):
         subtitle_position=(25,190),
         back_offset = (1.15, 1.15),
         move=(0,0),
-        image="back"
+        image="back2"
 
     )
     _qr_code_options = dict(_DEFAULT_QR_CODE_OPTIONS)
