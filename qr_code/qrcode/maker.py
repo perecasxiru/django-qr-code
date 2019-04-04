@@ -51,33 +51,39 @@ def make_qr_code_image(text, image_factory, qr_code_options=QRCodeOptions()):
 
     font = ImageFont.truetype("micros/static/grilled.ttf", 30)
     font2 = ImageFont.truetype("micros/static/grilled.ttf", 23)
+    w, h = font.getsize(qr_code_options.title)
+    w2, h2 = font2.getsize(qr_code_options.subtitle)
 
-    ImageDraw.Draw(
-        img  # Image
+    img2 = Image.open("micros/static/"+qr_code_options.image+".jpg")
+    img2 = img2.resize(img.size, Image.ANTIALIAS)
+    img2.paste(img,(0,0),img)
+    img_w, img_h = img2.size
+
+    background = Image.new('RGBA', (int(img_w+w*1.5), int(img_h+h*2.5)), (255, 255, 255, 255))
+
+    bg_w, bg_h = background.size
+    offset = ((bg_w - img_w) // 2, (bg_h - img_h) // 2)
+    background.paste(img2, offset)
+
+    draw = ImageDraw.Draw(
+        background  # Image
     ).text(
-        qr_code_options.title_position,  # Coordinates
+        ((bg_w - w) // 2, 0),  # Coordinates
         qr_code_options.title,  # Text
         (0, 0, 0),  # Color
         font=font
     )
 
     ImageDraw.Draw(
-        img  # Image
+        background  # Image
     ).text(
-        (qr_code_options.subtitle_position[0], img.size[1]-30),  # Coordinates
+        ((bg_w-w2) //2, background.size[1]-h2-2),  # Coordinates
         qr_code_options.subtitle,  # Text
         (0, 0, 0),  # Color
         font=font2
     )
 
-    img2 = Image.open("micros/static/"+qr_code_options.image+".jpg")
-    img2 = img2.resize((int(img.size[0]*qr_code_options.back_offset[0]),
-                        int(img.size[1]*qr_code_options.back_offset[1])), Image.ANTIALIAS)
-    img2.paste(img,qr_code_options.move,img)
-    # draw = ImageDraw.Draw(img2)
-
-
-    return img2
+    return background
 
 
 def _get_valid_error_correction_or_default(error_correction):
