@@ -59,7 +59,7 @@ def make_qr_code_image(text, image_factory, qr_code_options=QRCodeOptions()):
     img2.paste(img,(0,0),img)
     img_w, img_h = img2.size
 
-    background = Image.new('RGBA', (int(img_w+w*1.5), int(img_h+h*2.5)), (255, 255, 255, 255))
+    background = Image.new('RGBA', (int(max(img_w,w)*1.2), int(img_h+h*2.5)), (255, 255, 255, 255))
 
     bg_w, bg_h = background.size
     offset = ((bg_w - img_w) // 2, (bg_h - img_h) // 2)
@@ -130,7 +130,7 @@ def make_embedded_qr_code(text, qr_code_options=QRCodeOptions()):
         html_fragment = (str(stream.getvalue(), 'utf-8'))
     else:
         img.save(stream, format=PNG_FORMAT_NAME.upper())
-        html_fragment = '<img src="data:image/png;base64, %s" alt="%s">' % (str(base64.b64encode(stream.getvalue()), encoding='ascii'), escape(text))
+        html_fragment = '<img src="data:image/png;base64, %s" class="img-fluid" alt="%s">' % (str(base64.b64encode(stream.getvalue()), encoding='ascii'), escape(text))
     return mark_safe(html_fragment)
 
 
