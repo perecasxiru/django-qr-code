@@ -49,12 +49,12 @@ def make_qr_code_image(text, image_factory, qr_code_options=QRCodeOptions()):
     from PIL import ImageFont
     from PIL import ImageDraw
 
-    font = ImageFont.truetype("micros/static/grilled.ttf", 30)
-    font2 = ImageFont.truetype("micros/static/grilled.ttf", 23)
+    font = ImageFont.truetype("static/grilled.ttf", 30)
+    font2 = ImageFont.truetype("static/grilled.ttf", 23)
     w, h = font.getsize(qr_code_options.title)
     w2, h2 = font2.getsize(qr_code_options.subtitle)
 
-    img2 = Image.open("micros/static/"+qr_code_options.image+".jpg")
+    img2 = Image.open("static/images/"+qr_code_options.image+".jpg")
     img2 = img2.resize(img.size, Image.ANTIALIAS)
     img2.paste(img,(0,0),img)
     img_w, img_h = img2.size
